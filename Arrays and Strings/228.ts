@@ -1,33 +1,15 @@
 function summaryRanges(nums: number[]): string[] {
-    var ranges = [];
+    var ranges: string[] = [];
+
+    var start = 0;
     for (let i = 0; i < nums.length; i++) {
-        let startOfRange = nums[i];
+        // Check if not consecutive
+        if (nums[i] + 1 !== nums[i + 1] || i + 1 === nums.length) {
+            start === i
+                ? ranges.push(nums[start].toString())
+                : ranges.push(`${nums[start]}->${nums[i]}`);
 
-        // Check for consecutive numbers
-        for (let j = 0; j + i < nums.length; j++) {
-            // Numbers are not consecutive, so write to array
-            if (startOfRange + j !== nums[i + j]) {
-                j === 1
-                    ? ranges.push(startOfRange.toString())
-                    : ranges.push(
-                          startOfRange.toString() +
-                              "->" +
-                              nums[i + j - 1].toString()
-                      );
-
-                i += j - 1; // Already checked these
-                break;
-            } else if (i + j + 1 === nums.length) {
-                j === 0
-                    ? ranges.push(startOfRange.toString())
-                    : ranges.push(
-                          startOfRange.toString() +
-                              "->" +
-                              nums[i + j].toString()
-                      );
-
-                i += j; // Already checked these
-            }
+            start = i + 1;
         }
     }
 
