@@ -2,7 +2,7 @@ function groupAnagrams(strs: string[]): string[][] {
     let anagrams = new Map<string, string[]>();
 
     // Get all anagrams
-    strs.forEach((str) => {
+    for (const str of strs) {
         let sortedStr = str.split("").sort().join("");
 
         if (anagrams.has(sortedStr)) {
@@ -10,7 +10,7 @@ function groupAnagrams(strs: string[]): string[][] {
         } else {
             anagrams.set(sortedStr, [str]);
         }
-    });
+    }
 
     return [...anagrams.values()];
 }
