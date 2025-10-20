@@ -1,3 +1,22 @@
 function sortedSquares(nums: number[]): number[] {
-    return nums.map((num) => num ** 2).toSorted((a, b) => a - b);
+    let length = nums.length;
+    let leftPtr = 0;
+    let rightPtr = length - 1;
+
+    let squares = new Array(length);
+
+    while (leftPtr <= rightPtr) {
+        let leftSqr = nums[leftPtr] ** 2;
+        let rightSqr = nums[rightPtr] ** 2;
+
+        if (leftSqr >= rightSqr) {
+            squares[rightPtr - leftPtr] = leftSqr;
+            leftPtr++;
+        } else {
+            squares[rightPtr - leftPtr] = rightSqr;
+            rightPtr--;
+        }
+    }
+
+    return squares;
 }
